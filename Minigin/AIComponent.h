@@ -13,20 +13,15 @@ namespace kd
 		void Initialize() override;
 		void Update() override;
 		void Render() const override;
-		void SetEnable(bool enable)
-		{
-			if(enable) m_ExitGhostMode = true;
-			m_Enable = enable;
-		}
+		void SetEnable(bool enable);
 		bool NoAvailablePath() ;
 		GameObject* GetTarget() const { return m_Target; };
+
 	private:
-
 		bool CalculatePath();
-
 		bool m_NoAvailablePath = false;
 		bool m_Enable = true;
-		bool m_ExitGhostMode = true;
+		bool m_InitialAIMode = true;
 		const float m_GridSize;
 		const float m_Speed = 1.f;
 		GameObject* m_Target;

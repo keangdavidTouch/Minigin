@@ -24,12 +24,12 @@ void kd::AIComponent::Update()
 	auto playerPos = GetGameObject()->GetTransform().GetPosition();
 
 	//After Switching from GhostState
-	if(m_ExitGhostMode)
+	if(m_InitialAIMode)
 	{
 		playerPos.x = pathPos.x;
 		playerPos.y = pathPos.y;
 		GetGameObject()->GetTransform().SetPosition(playerPos);
-		m_ExitGhostMode = false;
+		m_InitialAIMode = false;
 		return;
 	}
 	
@@ -68,6 +68,14 @@ void kd::AIComponent::Update()
 void kd::AIComponent::Render() const 
 { 
 	PathFinder::GetInstance().DebugRenderPath();
+}
+
+void kd::AIComponent::SetEnable(bool enable)
+{
+	m_Enable = enable;
+	if(enable) {
+		m_InitialAIMode = true;
+	}
 }
 
 bool kd::AIComponent::NoAvailablePath()
