@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Commands">
+      <UniqueIdentifier>{ab8889f4-451e-4238-89e6-7faca25bc1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{213577ad-e60f-4c69-8753-8baa274df90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State">
+      <UniqueIdentifier>{99958fc4-a20f-4ac6-a4e5-1e8e0c590650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State\Taizo">
+      <UniqueIdentifier>{e8c7fdd1-4e25-4a63-a32a-cb065a5f3712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State\Enemy">
+      <UniqueIdentifier>{322cbe3f-8da4-45f5-a704-cf34ac0d6067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State\Rock">
+      <UniqueIdentifier>{7aa600be-85c9-49b0-8e7b-6c18f23c89d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observers">
+      <UniqueIdentifier>{c10644f1-3027-4cfe-a1e6-18c556f8d947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Enemy">
+      <UniqueIdentifier>{13985951-9927-4056-af34-4d8fcbca7821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Taizo">
+      <UniqueIdentifier>{a282aff6-865b-4ecc-80b2-214d1f8733af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefabs">
+      <UniqueIdentifier>{d48d9f42-4188-4ee2-9250-5f362ca00ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level">
+      <UniqueIdentifier>{ab2070f3-e6a5-4a58-9e9b-a1da5b918660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Debugging">
+      <UniqueIdentifier>{dc897eee-7cbe-49b0-a34b-865a116bae29}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveWithJoystickCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchSceneCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugGame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PumpCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="RockBehaviour.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreDisplay.h">
+      <Filter>Source Files\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthDisplay.h">
+      <Filter>Source Files\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="TaizoState.h">
+      <Filter>Source Files\State\Taizo</Filter>
+    </ClInclude>
+    <ClInclude Include="RockState.h">
+      <Filter>Source Files\State\Rock</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>Source Files\State\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="TaizoBehaviour.h">
+      <Filter>Source Files\Components\Taizo</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarBehaviour.h">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PoogaBehaviour.h">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBehaviour.h">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugPrefabs.h">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Source Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarFlameCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugComponent.h">
+      <Filter>Source Files\Components\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="DigTileComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PumpBehaviour.h">
+      <Filter>Source Files\Components\Taizo</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugAIComponent.h">
+      <Filter>Source Files\Components\Debugging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DigDugGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RockBehaviour.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreDisplay.cpp">
+      <Filter>Source Files\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDisplay.cpp">
+      <Filter>Source Files\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="TaizoState.cpp">
+      <Filter>Source Files\State\Taizo</Filter>
+    </ClCompile>
+    <ClCompile Include="RockState.cpp">
+      <Filter>Source Files\State\Rock</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>Source Files\State\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="TaizoBehaviour.cpp">
+      <Filter>Source Files\Components\Taizo</Filter>
+    </ClCompile>
+    <ClCompile Include="FygarBehaviour.cpp">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PoogaBehaviour.cpp">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBehaviour.cpp">
+      <Filter>Source Files\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="DigDugPrefabs.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugComponent.cpp">
+      <Filter>Source Files\Components\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="DigTileComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PumpBehaviour.cpp">
+      <Filter>Source Files\Components\Taizo</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugAIComponent.cpp">
+      <Filter>Source Files\Components\Debugging</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
