@@ -26,7 +26,7 @@ void kd::PathFinder::Init(unsigned short nrOfCol, unsigned short nrOfRow, int gr
 
 		for (int col  = 0; col < m_NrOfCol; col++)
 		{
-			m_AllNodes[row].push_back(std::make_shared<Cell>(col, row));
+			m_AllNodes[row].push_back(std::make_shared<Cell>(col, row, GetCellPosition(col, row)));
 		}	
 	}
 
@@ -187,4 +187,9 @@ bool kd::PathFinder::IsValidCell(int col, int row) const
 			return !m_AllNodes[row][col]->IsBlock();
 
 	return validIndex;
+}
+
+glm::vec2 kd::PathFinder::GetCellPosition(int cols, int rows) const
+{
+	return glm::vec2(float(cols * m_GridSize), float(rows * m_GridSize));
 }

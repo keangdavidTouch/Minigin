@@ -17,6 +17,7 @@ namespace kd
 		bool SetCellAtPoAsBlock(int y, int x, bool block);
 		bool IsCellBlock(int row, int col) const;
 		bool IsCellAtPosBlock(int y, int x) const;
+		glm::vec2 GetCellPosition(int cols, int rows) const; 
 		unsigned short NumberOfCol() const { return m_NrOfCol; }
 		unsigned short NumberOfRow() const { return m_NrOfRow; }
 
