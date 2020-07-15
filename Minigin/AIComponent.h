@@ -26,7 +26,6 @@ namespace kd
 		const float m_Speed = 1.f;
 		GameObject* m_Target;
 		std::vector<glm::vec2> m_Paths;
-	
 	};
 }
 

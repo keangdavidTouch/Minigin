@@ -2,8 +2,6 @@
 #include "PathFinder.h"
 #include "Cell.h"
 #include <algorithm>
-#include "Renderer.h"
-#include <SDL.h>
 
 kd::PathFinder::PathFinder()
 	: m_Startcell()
@@ -79,33 +77,22 @@ void kd::PathFinder::ResetNodes()
 	}
 }
 
-std::vector<glm::vec2> kd::PathFinder::FindPath(unsigned short fromCol, unsigned short fromRow, unsigned short  toCol, unsigned short  toRow)
+void kd::PathFinder::FindPath(std::vector<glm::vec2>& paths, unsigned short fromCol, unsigned short fromRow, unsigned short  toCol, unsigned short  toRow)
 {
 	m_StartCol = fromCol;
 	m_StartRow = fromRow;
 
 	// Setup Before Start Finding Path
+	paths.clear();
 	m_OpenList.clear();
 	m_CloseList.clear();
 
 	m_Startcell = m_AllNodes[fromRow][fromCol].get();
 	m_TargetCell = m_AllNodes[toRow][toCol].get();
 
-	auto distance = [](Cell* a, Cell* b) // For convenience
-	{
-		auto aPos = a->GetPosition();
-		auto bPos = b->GetPosition();
-		return sqrtf((aPos.x - bPos.x)*(aPos.x - bPos.x) + (aPos.y - bPos.y)*(aPos.y - bPos.y));
-	};
-
-	auto heuristic = [distance](Cell* a, Cell* b) // So we can experiment with heuristic
-	{
-		return distance(a, b);
-	};
-
 	auto currentCell = m_Startcell;
 	currentCell->SetGCost(0);
-	currentCell->SetHCost(heuristic(m_Startcell, m_TargetCell));
+	currentCell->SetHCost(GetHCost(m_Startcell, m_TargetCell));
 
 	m_OpenList.push_back(m_Startcell);
 
@@ -122,7 +109,7 @@ std::vector<glm::vec2> kd::PathFinder::FindPath(unsigned short fromCol, unsigned
 			// if not visit yet
 			if (std::find(m_CloseList.begin(), m_CloseList.end(), cell) == m_CloseList.end()) 
 			{
-				float tempG = currentCell->GetGCost() + distance(currentCell, cell);
+				float tempG = currentCell->GetGCost() + GetDistance(currentCell, cell);
 
 				if (std::find(m_OpenList.begin(), m_OpenList.end(), cell) == m_OpenList.end() && cell->IsBlock() == false)
 					m_OpenList.push_back(cell);
@@ -130,14 +117,12 @@ std::vector<glm::vec2> kd::PathFinder::FindPath(unsigned short fromCol, unsigned
 					continue;
 
 				cell->SetGCost(tempG);
-				cell->SetHCost(distance(currentCell, m_TargetCell));
+				cell->SetHCost(GetDistance(currentCell, m_TargetCell));
 				cell->SetFCost(cell->GetGCost() + cell->GetHCost());
 				cell->SetParent(currentCell);
 			}
 		}
 	}
-
-	std::vector<glm::vec2> paths{};
 
 	// Reconstruct Path
 	if(m_TargetCell != nullptr)
@@ -153,9 +138,18 @@ std::vector<glm::vec2> kd::PathFinder::FindPath(unsigned short fromCol, unsigned
 		if (!paths.empty())
 			paths.pop_back();
 	}
+}
 
-	m_Paths = paths;
-	return paths;
+float kd::PathFinder::GetDistance(Cell * a, Cell * b)
+{
+	auto aPos = a->GetPosition();
+	auto bPos = b->GetPosition();
+	return sqrtf((aPos.x - bPos.x)*(aPos.x - bPos.x) + (aPos.y - bPos.y)*(aPos.y - bPos.y));
+}
+
+float kd::PathFinder::GetHCost(Cell * a, Cell * b)
+{
+	return GetDistance(a, b);
 }
 
 void kd::PathFinder::SetCellAsBlock(int row, int col, bool block)
@@ -194,67 +188,3 @@ bool kd::PathFinder::IsValidCell(int col, int row) const
 
 	return validIndex;
 }
-
-#pragma region DEBUG_RENDERING
-
-void kd::PathFinder::DebugRenderCellGrids()
-{
-	int x, y;
-	if (SDL_MOUSEBUTTONUP && SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE)) //SDL_MOUSEBUTTONDOWN
-	{
-		auto node = m_AllNodes[y / m_GridSize][x / m_GridSize];
-		node->SetAsBlock(false);
-	}
-
-	int drawSize = m_GridSize - 1;
-	SDL_Rect rect{0, 0, drawSize, drawSize};
-
-	for (int row  = 0; row < m_NrOfRow; row++)
-	{
-		for (int col  = 0; col < m_NrOfCol; col++)
-		{
-			auto pos = m_AllNodes[row][col]->GetPosition();
-			rect.x = int(pos.x);
-			rect.y = int(pos.y);
-
-			SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(),0, 0, 0, 0);
-
-			if(m_AllNodes[row][col]->IsBlock())
-				SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(),255, 255, 255, 0);
-			if (row == m_NrOfRow - 1 && col == m_NrOfCol - 1)
-				SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(),0, 255, 0, 0);
-
-			SDL_RenderFillRect(Renderer::GetInstance().GetSDLRenderer(), &rect);
-		}
-	}
-}
-
-void kd::PathFinder::DebugRenderPath()
-{
-	//#DEBUG
-	if(m_Paths.size() < 1) 
-		return;
-
-	/*SDL_Rect startRect{0, 0, m_GridSize, m_GridSize};
-	startRect.x = m_StartCol * m_GridSize;
-	startRect.y = m_StartRow * m_GridSize;
-	SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(),255, 0, 0, 0);
-	SDL_RenderDrawRect(Renderer::GetInstance().GetSDLRenderer(), &startRect);*/
-
-	/*int offset = 40;
-	int halfOffset = offset/2;
-	int drawSize = m_GridSize - offset;
-	SDL_Rect rect{0, 0, drawSize, drawSize};
-
-	for (size_t i  = 1; i < m_Paths.size(); i++)
-	{
-		auto pos = m_Paths[i];
-		rect.x = int(pos.x) + halfOffset;
-		rect.y = int(pos.y) + halfOffset;
-
-		SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(),0, 255, 0, 0);
-		SDL_RenderFillRect(Renderer::GetInstance().GetSDLRenderer(), &rect);
-	}*/
-}
-
-#pragma endregion

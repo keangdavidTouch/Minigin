@@ -65,10 +65,7 @@ void kd::AIComponent::Update()
 	}
 }
 
-void kd::AIComponent::Render() const 
-{ 
-	PathFinder::GetInstance().DebugRenderPath();
-}
+void kd::AIComponent::Render() const {}
 
 void kd::AIComponent::SetEnable(bool enable)
 {
@@ -95,8 +92,7 @@ bool kd::AIComponent::CalculatePath()
 	auto toCol = static_cast<unsigned short>(glm::round(targetPos.x / m_GridSize));
 	auto toRow = static_cast<unsigned short>(glm::round(targetPos.y / m_GridSize));
 
-	m_Paths.clear();
-	m_Paths = PathFinder::GetInstance().FindPath(fromCol, fromRow, toCol, toRow);
+	PathFinder::GetInstance().FindPath(m_Paths, fromCol, fromRow, toCol, toRow);
 	PathFinder::GetInstance().ResetNodes();
 
 	m_NoAvailablePath = m_Paths.empty(); 
