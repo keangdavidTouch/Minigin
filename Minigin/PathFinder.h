@@ -9,7 +9,7 @@ namespace kd
 	{
 	public:
 		PathFinder();
-		~PathFinder() = default;
+		~PathFinder();
 		void Init(unsigned short nrOfCol, unsigned short nrOfRow, int gridSize);
 		void ResetNodes();
 		void FindPath(std::vector<glm::vec2>& paths, unsigned short  fromCol, unsigned short  fromRow, unsigned short  toCol, unsigned short  toRow);
@@ -31,10 +31,9 @@ namespace kd
 		Cell* m_TargetCell;
 		std::vector<Cell*> m_OpenList;
 		std::vector<Cell*> m_CloseList;
-		std::vector<std::vector<std::shared_ptr<Cell>>> m_AllNodes;
+		std::vector<std::vector<Cell*>> m_AllNodes;
 		bool IsValidCell(int col, int row) const;
-		float GetDistance(Cell* a, Cell* b);
-		float GetHCost(Cell* a, Cell* b);
+		float GetDistance(Cell* a, Cell* b) const;
 	};
 }
 
